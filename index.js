@@ -46,13 +46,11 @@ droneState.on(
     "message",
     throttle((state) => {
         const formattedState = parseState(state.toString());
-        //console.log(formattedState);
         io.sockets.emit("dronestate", formattedState);
     }, 1000)
 );
 
 droneStream.on("message", message => {
-    //console.log(message);
 
     if (h264encoder !== false) {
         h264encoder.stdin.write(message.slice(2));
